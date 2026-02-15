@@ -1,4 +1,4 @@
 - name: Hello world
-  ansible builtin.debug:
+  ansible.builtin.debug:
     msg: "Hello world form roles"
 
