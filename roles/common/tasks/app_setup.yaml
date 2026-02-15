@@ -1,0 +1,34 @@
+- name: creating the system user roboshop
+  ansible.builtin.user: 
+    name: roboshop
+    system: true #system user 
+    home: /app #optionally setting home
+    shell: /sbin/nologin
+    comment: roboshop system user
+
+
+- name: delete app directory    # Why are we deleting the directory? If we are running the playbook again, that means there might be code changes, right? If the code already exists, Ansible will skip the task when we run the playbook. So is that why we are deleting it?
+  ansible.builtin.file:
+    path: /app
+    state: absent
+
+- name: create app directory
+  ansible.builtin.file:
+    path: /app
+    state: directory
+
+- name: Delete the catalogue zip file #Why are we deleting the zip file? If we are running the playbook again, that means there might be code changes, right? If the code already exists, Ansible will skip the task when we run the playbook. So is that why we are deleting it?
+  ansible.builtin.file: 
+    path: /tmp/catalogue.zip
+    state: absent
+
+- name: Downloading the catalogue zip file
+  ansible.builtin.get_url: 
+    url: https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip 
+    dest: /tmp/catalogue.zip
+
+- name: Unzip the code
+  ansible.builtin.unarchive:
+    src: /tmp/catalogue.zip
+    dest: /app
+    remote_src: yes #What does remote_src mean here? The catalogue code is not on the Ansible control node — it is already downloaded on the target server using the get_url command. So why do we need to mention remote_src: yes? If we remove it, we get an error.
