@@ -2,3 +2,4 @@
   ansible.builtin.template:
     src: "{{ component }}.service.j2" # templates we called as .j2 (jinja 2)
     dest: "/etc/systemd/system/{{ component }}.service"
+  notify: "Reload systemd and restart {{ component }}"

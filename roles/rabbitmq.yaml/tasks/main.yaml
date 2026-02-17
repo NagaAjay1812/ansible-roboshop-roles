@@ -1,0 +1,26 @@
+- name: copy the rabbitmq repo
+  ansible.builtin.copy:
+    src: rabbitmq.repo
+    dest: /etc/yum.repos.d/rabbitmq.repo
+
+- name: Install rabbitmq server
+  ansible.builtin.dnf:
+    name: rabbitmq-server
+    state: present
+
+- name: Start, enable rabbitmq service
+  ansible.builtin.service:
+    name: rabbitmq-server
+    state: restarted #why we are restaring becoz if its running it will restart
+    enabled: yes
+
+- name: create rabbitmq user
+  community.rabbitmq.rabbitmq_user: # module is availlable on community if its not available use cmd module
+    user: roboshop
+    password: roboshop123
+    permissions:
+      - vhost: /
+        configure_priv: .*
+        read_priv: .*
+        write_priv: .*
+    state: present
