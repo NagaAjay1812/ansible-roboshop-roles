@@ -1,11 +1,22 @@
-- name: Enable nodejs:20                                        # we dont have option to enable the secific version of nodejs in dnf module s we are using command module and we are not doing reirection or pipeing so thats why we are not using shell
-	ansible.builtin.command: dnf module enable nodejs:20 -y
+- name: Enable nodejs:20 # we dont have option to enable the secific version of nodejs in dnf module s we are using command module and we are not doing redirection or pipeing so thats why we are not using shell
+  ansible.builtin.command: dnf module enable nodejs:20 -y
 
 - name: install nodejs
-	ansible.builtin.dnf:
-		name: nodejs
-	  state: present
+  ansible.builtin.dnf:
+    name: nodejs
+    state: present
 
-      
+- name: Install the dependencies
+  community.general.npm:
+    path: /app # Directory containing package.json
+    state: present
 
-	
+- name: copy the {{ component }} service
+  ansible.builtin.copy:
+    src: "{{ component }}.service"
+    dest: "/etc/systemd/system/{{ component }}.service"
+
+- name: copy mongo repo
+  ansible.builtin.copy:
+    src: mongo.repo
+    dest: /etc/yum.repos.d/mongo.repo
