@@ -4,7 +4,7 @@
     state: present
 
 - name: Updating default root password for roboshop user
-  ansible.builtin.command: mysql_secure_installation --set-root-pass RoboShop@1
+  ansible.builtin.command: mysql_secure_installation --set-root-pass "{{ MYSQL_ROOT_PASSWORD }}" # I created a separate vars directory to securely manage variables and passwords. Inside that directory, I added a main.yaml file where I defined all the required variables and sensitive values.
 
 - name: start and enable the service
   ansible.builtin.service:
