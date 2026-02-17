@@ -12,3 +12,33 @@
   ansible.builtin.import_role:
     name: common
     tasks_from: systemd_setup.yaml
+
+- name: copy mongo repo
+  ansible.builtin.copy:
+    src: mongo.repo
+    dest: /etc/yum.repos.d/mongo.repo
+
+- name: Install MongoDB Client Package
+  ansible.builtin.dnf:
+    name: mongodb-mongosh
+    state: present
+
+- name: Check products loaded or not
+  ansible.builtin.command: mongosh --host "{{ MONGODB_HOST }}" --quiet  --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
+  register: catalogue_output
+
+- name: print the output
+  ansible.builtin.debug:
+    msg: "{{ catalogue_output }}"
+
+- name: Load the data
+  ansible.builtin.shell: mongosh --host "{{ MONGODB_HOST }}" </app/db/master-data.js #comand module will not work because  we are doing redrection
+
+  when: catalogue_output.stdout | int < 0 # before catalogue_output.stdout<0 we cant compare string with number so i converted string to integer using pipe
+
+- name: Start, enable & daemon-reload catalogue service
+  ansible.builtin.systemd:
+    name: catalogue
+    daemon_reload: yes
+    state: restarted #why we are restaring if its running it will restart
+    enabled: yes
