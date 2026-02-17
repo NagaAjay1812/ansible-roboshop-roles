@@ -15,7 +15,7 @@
     enabled: yes
 
 - name: create rabbitmq user
-  community.rabbitmq.rabbitmq_user: # module is availlable on community if its not available use cmd module
+  community.rabbitmq.rabbitmq_user: # module is availlable on community if its not available use cmd module.
     user: roboshop
     password: roboshop123
     permissions:

@@ -1,6 +1,6 @@
 - name: Enable the Nginx module stream and install the package
   ansible.builtin.dnf:
-    name: "@nginx:1.24/server" # Use the correct module:stream/profile for your system
+    name: "@nginx:1.24/server" # Use the correct module:stream/profile for your system.
     state: present
     become: true
 

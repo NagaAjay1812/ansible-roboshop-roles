@@ -8,19 +8,7 @@
     name: common
     tasks_from: nodejs_setup.yaml
 
-- name: run the systemd-setup code
+- name: run the systemd-setup code #
   ansible.builtin.import_role:
     name: common
     tasks_from: systemd_setup.yaml
-
-- name: copy the user service
-  ansible.builtin.template: #We use the template module because it understands variables. It searches for the variable placeholders and replaces them with actual values. Otherwise, Ansible will treat them as plain text, and we may get errors.
-    src: user.service
-    dest: /etc/systemd/system/user.service
-
-- name: Start, enable & daemon-reload user service
-  ansible.builtin.systemd:
-    name: user
-    daemon_reload: yes
-    state: restarted #why we are restaring if its running it will restart
-    enabled: yes

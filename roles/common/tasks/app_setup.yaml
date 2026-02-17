@@ -30,5 +30,5 @@
   ansible.builtin.unarchive:
     src: /tmp/{{ component }}.zip
     dest: /app
-    remote_src: yes #What does remote_src mean here? The {{ component }} code is not on the Ansible control node — it is already downloaded on the target server using the get_url command. So why do we need to mention remote_src: yes? If we remove it, we get an error.
+    remote_src: yes #What does remote_src mean here?  The {{ component }} code is not on the Ansible control node — it is already downloaded on the target server using the get_url command. So why do we need to mention remote_src: yes? If we remove it, we get an error.
 

@@ -1,3 +1,3 @@
 dependencies:
-#The catalogue is dependent on common. For example, if an EC2 instance depends on a security group, which one should we create first? The security group, right? Similarly, since catalogue depends on common, we need to run common first.
- - common
+  #The catalogue is dependent on common. For example, if an EC2 instance depends on a security group, which one should we create first? The security group, right? Similarly, since catalogue depends on common, we need to run common first
+  - common

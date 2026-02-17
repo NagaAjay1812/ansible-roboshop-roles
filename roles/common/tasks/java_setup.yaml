@@ -5,6 +5,7 @@
   loop:
     - maven
     - mysql
+
 - name: Install the dependencies
   ansible.builtin.command: mvn clean package
   args:
