@@ -2,3 +2,13 @@
   ansible.builtin.import_role:
     name: common
     tasks_from: app_setup.yaml
+
+- name: run the anodejs-setup code
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: nodejs_setup.yaml
+
+- name: run the systemd-setup code
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: systemd_setup.yaml
