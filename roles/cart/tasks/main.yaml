@@ -1,0 +1,26 @@
+- name: run the app_setup code
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: app_setup.yaml
+
+- name: run the anodejs-setup code
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: nodejs_setup.yaml
+
+- name: run the systemd-setup code
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: systemd_setup.yaml
+
+- name: copy the cart service
+  ansible.builtin.template: #We use the template module because it understands variables. It searches for the variable placeholders and replaces them with actual values. Otherwise, Ansible will treat them as plain text, and we may get errors.
+    src: cart.service
+    dest: /etc/systemd/system/cart.service
+
+- name: Start, enable & daemon-reload cart service
+  ansible.builtin.systemd:
+    name: cart
+    daemon_reload: yes
+    state: restarted #why we are restaring if its running it will restart
+    enabled: yes
