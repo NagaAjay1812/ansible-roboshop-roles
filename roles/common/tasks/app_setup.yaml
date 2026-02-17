@@ -16,19 +16,19 @@
     path: /app
     state: directory
 
-- name: Delete the {{ component } zip file #Why are we deleting the zip file? If we are running the playbook again, that means there might be code changes, right? If the code already exists, Ansible will skip the task when we run the playbook. So is that why we are deleting it?
+- name: Delete the {{ component }} zip file #Why are we deleting the zip file? If we are running the playbook again, that means there might be code changes, right? If the code already exists, Ansible will skip the task when we run the playbook. So is that why we are deleting it?
   ansible.builtin.file:
-    path: /tmp/{{ component }.zip
+    path: /tmp/{{ component }}.zip
     state: absent
 
-- name: Downloading the {{ component } zip file
+- name: Downloading the {{ component }} zip file
   ansible.builtin.get_url:
-    url: https://roboshop-artifacts.s3.amazonaws.com/{{ component }-v3.zip
-    dest: /tmp/{{ component }.zip
+    url: https://roboshop-artifacts.s3.amazonaws.com/{{ component }}-v3.zip
+    dest: /tmp/{{ component }}.zip
 
 - name: Unzip the code
   ansible.builtin.unarchive:
-    src: /tmp/{{ component }.zip
+    src: /tmp/{{ component }}.zip
     dest: /app
-    remote_src: yes #What does remote_src mean here? The {{ component } code is not on the Ansible control node — it is already downloaded on the target server using the get_url command. So why do we need to mention remote_src: yes? If we remove it, we get an error.
+    remote_src: yes #What does remote_src mean here? The {{ component }} code is not on the Ansible control node — it is already downloaded on the target server using the get_url command. So why do we need to mention remote_src: yes? If we remove it, we get an error.
 
