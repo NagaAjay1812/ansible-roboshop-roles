@@ -1,4 +1,4 @@
-- name: "Reload systemd and restart catalogue"
+- name: "Reload systemd and restart user"
   ansible.builtin.systemd:
     name: user
     daemon_reload: yes
