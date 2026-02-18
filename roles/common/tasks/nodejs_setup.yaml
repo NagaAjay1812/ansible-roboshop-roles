@@ -7,6 +7,8 @@
     state: present
 
 - name: Install the dependencies
+  tags:
+    - deployment
   community.general.npm:
-    path: /app # Directory containing package.json
+    path: /app
     state: present

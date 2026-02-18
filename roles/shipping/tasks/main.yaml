@@ -14,6 +14,8 @@
     tasks_from: systemd_setup.yaml
 
 - name: install dependencies #in background python code is connected to MySQL these libraries/dependencies are required
+  tags:
+    - deployment
   ansible.builtin.pip:
     name: "{{ item }}"
     executable: pip3.9

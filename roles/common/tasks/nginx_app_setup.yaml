@@ -1,4 +1,6 @@
 - name: Remove the nginx default directory
+  tags:
+    - deployment
   ansible.builtin.file:
     path: /usr/share/nginx/html
     state: absent
