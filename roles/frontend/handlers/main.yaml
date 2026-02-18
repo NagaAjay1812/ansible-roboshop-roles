@@ -1,4 +1,4 @@
-- name: Start, enabled the nginx
+- name: Reload systemd and restart nginx
   ansible.builtin.service:
     name: nginx
     state: restarted
