@@ -3,15 +3,10 @@
     path: /usr/share/nginx/html
     state: absent
 
-- name: create the nginx directory
+- name: create the nginx html directory
   ansible.builtin.file:
     path: /usr/share/nginx/html
     state: directory
-
-- name: Remove the frontend code
-  ansible.builtin.file:
-    src: /tmp/frontend.zip
-    state: absent
 
 - name: Download the frontend code
   ansible.builtin.get_url:
