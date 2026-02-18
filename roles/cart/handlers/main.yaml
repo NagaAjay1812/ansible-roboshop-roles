@@ -1,4 +1,4 @@
-- name: Start, enable & daemon-reload cart service
+- name: "Reload systemd and restart cart"
   ansible.builtin.systemd:
     name: cart
     daemon_reload: yes

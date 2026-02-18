@@ -1,4 +1,4 @@
-- name: Start, enable & daemon-reload payment service
+- name: "Reload systemd and restart payment"
   ansible.builtin.systemd:
     name: payment
     daemon_reload: yes

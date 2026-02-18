@@ -1,4 +1,4 @@
-- name: Start, enable & daemon-reload shipping service
+- name: "Reload systemd and restart shipping"
   ansible.builtin.systemd:
     name: shipping
     daemon_reload: yes

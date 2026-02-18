@@ -1,4 +1,4 @@
-- name: Start, enable & daemon-reload catalogue service
+- name: "Reload systemd and restart catalogue"
   ansible.builtin.systemd:
     name: catalogue
     daemon_reload: yes
