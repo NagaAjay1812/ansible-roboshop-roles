@@ -5,11 +5,13 @@
     name: common
     tasks_from: nginx_app_setup.yaml
 
-- name: Enable the Nginx module stream and install the package
+- name: enable nginx 1.24
+  ansible.builtin.command: dnf module enable nginx:1.24 -y
+
+- name: install nginx
   ansible.builtin.dnf:
-    name: "@nginx:1.24/server" # Use the correct module:stream/profile for your system.
+    name: nginx
     state: present
-    become: true
 
 - name: copy the service file
   ansible.builtin.template:
