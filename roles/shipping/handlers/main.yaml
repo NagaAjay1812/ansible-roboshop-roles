@@ -1,4 +1,6 @@
 - name: "Reload systemd and restart shipping"
+  tags:
+    - deployment
   ansible.builtin.systemd:
     name: shipping
     daemon_reload: yes

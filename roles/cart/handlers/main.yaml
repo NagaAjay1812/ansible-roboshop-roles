@@ -1,4 +1,6 @@
 - name: "Reload systemd and restart cart"
+  tags:
+    - deployment
   ansible.builtin.systemd:
     name: cart
     daemon_reload: yes

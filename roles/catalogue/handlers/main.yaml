@@ -1,4 +1,6 @@
 - name: "Reload systemd and restart catalogue"
+  tags:
+    - deployment
   ansible.builtin.systemd:
     name: catalogue
     daemon_reload: yes

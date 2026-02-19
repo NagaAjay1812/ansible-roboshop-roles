@@ -1,4 +1,6 @@
 - name: "Reload systemd and restart user"
+  tags:
+    - deployment
   ansible.builtin.systemd:
     name: user
     daemon_reload: yes

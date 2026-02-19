@@ -1,4 +1,6 @@
 - name: "Reload systemd and restart payment"
+  tags:
+    - deployment
   ansible.builtin.systemd:
     name: payment
     daemon_reload: yes
