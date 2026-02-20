@@ -75,4 +75,4 @@ This project marked the transition from:
 to  
 > “I can design **structured automation systems**.”
 
-That mindset change is what separates task-runner users from true automation engineers. :contentReference[oaicite:6]{index=6}
+That mindset change is what separates task-runner users from true automation engineers. 
